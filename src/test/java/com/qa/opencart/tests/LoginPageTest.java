@@ -49,6 +49,13 @@ public class LoginPageTest extends BaseTest{
 		Assert.assertEquals(loginPage.isFooterText(), footerText);
 	}
 	
+	@Test
+	public void doLoginTest() {
+		accountsPage = loginPage.doLogin("debasmita5152@gmail.com", "TestOpen@23!");
+		Assert.assertTrue(accountsPage.doesLogoutLinkExist());
+		
+	}
+	
 	
 }
 
