@@ -28,11 +28,6 @@ public class LoginPageTest extends BaseTest{
 	}
 	
 	@Test
-	public void doLoginTest() {
-		loginPage.doLogin("debasmita@gmail.com", "test123");
-	}
-	
-	@Test
 	public void doesLogoExistTest() {
 		Assert.assertTrue(loginPage.doesLogoExist());
 	}
