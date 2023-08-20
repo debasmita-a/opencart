@@ -7,9 +7,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import com.qa.opencart.utils.ElementUtil;
+
 public class LoginPage {
 
 	private WebDriver driver;
+	private ElementUtil util;
 	
 	//1.private By locators
 	private By emailID = By.id("input-email");
@@ -32,29 +35,30 @@ public class LoginPage {
 	//2.public constructor
 	public LoginPage(WebDriver driver) {
 		this.driver = driver;
+		util = new ElementUtil(driver);
 	}
 	
 	//3.page actions/behavior
 	public String getLoginPageTitle() {
-		String title = driver.getTitle();
+		String title = util.waitForTitleIs("Account Login", 5000);
 		System.out.println("Title of Login page : "+ title);
 		return title;
 	}
 	
 	public String getLoginPageURL() {
-		String url = driver.getCurrentUrl();
+		String url = util.waitForURLContains("route=account/account", 5000);
 		System.out.println("Login page URL is : "+url);
 		return url;
 	}
 	
 	public boolean doesForgotPwdLinkExist() {
-		return driver.findElement(forgotPwdLink).isDisplayed();
+		return util.waitForElementVisible(forgotPwdLink, 2000).isDisplayed();
 	}
 	
 	public AccountsPage doLogin(String un, String pwd) {
-		driver.findElement(emailID).sendKeys(un);
-		driver.findElement(password).sendKeys(pwd);
-		driver.findElement(loginBtn).click();
+		util.waitForElementVisible(emailID,2000).sendKeys(un);
+		util.doSelectByValue(password, pwd);
+		util.doClick(loginBtn);
 		return new AccountsPage(driver); //TDD approach - Test Driven Development
 	}
 	
