@@ -32,11 +32,11 @@ public class AccountCreatedPageTest extends BaseTest {
 	
 	@Test
 	public void getAccountCreatedPageURLTest() {
-		Assert.assertEquals(accCreatedPage.getAccountCreatedPageURL(), "route=account/success");
+		Assert.assertTrue(accCreatedPage.getAccountCreatedPageURL().contains("route=account/success"));
 	}
 	
 	@AfterClass
 	public void doContinueTest() {
-		
+		Assert.assertEquals(accountsPage.getAccountsPageTitle(), "My Account");
 	}
 }
