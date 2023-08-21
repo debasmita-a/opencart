@@ -40,6 +40,7 @@ public class AccountsPageTest extends BaseTest{
 	public void listAccountsHeadersTest() {
 		List<String> accHeaders = Arrays.asList("My Account","My Orders","My Affiliate Account","Newsletter");
 	    Assert.assertEquals(accountsPage.listAccountsHeaders(), accHeaders);
+	    Assert.assertEquals(accountsPage.listAccountsHeaders().size(), 4);
 	}
 	
 }

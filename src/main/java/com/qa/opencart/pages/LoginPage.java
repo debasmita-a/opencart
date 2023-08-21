@@ -55,7 +55,7 @@ public class LoginPage {
 		driver.findElement(emailID).sendKeys(un);
 		driver.findElement(password).sendKeys(pwd);
 		driver.findElement(loginBtn).click();
-		return new AccountsPage(driver); //TDD approach - Test Driven Development
+		return new AccountsPage(driver); //TDD approach - Test Driven Development - Page chaining method
 	}
 	
 	public boolean doesLogoExist() {
