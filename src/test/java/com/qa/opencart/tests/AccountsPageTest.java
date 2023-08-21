@@ -8,12 +8,13 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import com.qa.opencart.base.BaseTest;
+import com.qa.opencart.pages.AccountsPage;
 
 public class AccountsPageTest extends BaseTest{
 	
 	@BeforeClass
-	public void accPageSetUp() {
-		loginPage.doLogin("debasmita5152@gmail.com", "TestOpen@23!");
+	public AccountsPage accPageSetUp() {
+		return loginPage.doLogin("debasmita5152@gmail.com", "TestOpen@23!");
 	}
 
 	@Test

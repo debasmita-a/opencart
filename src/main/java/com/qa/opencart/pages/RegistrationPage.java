@@ -3,9 +3,12 @@ package com.qa.opencart.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import com.qa.opencart.utils.ElementUtil;
+
 public class RegistrationPage {
 
 	private WebDriver driver;
+	private ElementUtil util;
 	
 	private By firstName = By.id("input-firstname");
 	private By lastName = By.id("input-lastname");
@@ -24,11 +27,33 @@ public class RegistrationPage {
 		this.driver = driver;
 	}
 	
-	public void doRegistration() {
-		driver.findElement(firstName).sendKeys("test01");
-		driver.findElement(lastName).sendKeys("nameTest");
-		driver.findElement(email).sendKeys("test01@gmail.com");
-		driver.findElement(telephone).sendKeys("7766885");
+	public AccountCreatedPage doRegistration(String fName, String lName, String emailID, String tele, String pass, String passConfirm) {
+		util.doSendKeys(firstName, fName);
+		util.doSendKeys(lastName, lName);
+		util.doSendKeys(email, emailID);
+		util.doSendKeys(telephone, tele);
+		util.doSendKeys(password, pass);
+		util.doSendKeys(pwdConfirm, pass);
+		driver.findElement(newsletterRadioBtn).getAttribute("checked");
+		util.doClick(privacyPolicyCheck);
+		util.doClick(continueBtn);
 		
+		return 	new AccountCreatedPage(driver);
+	}
+	
+	public boolean isPrivacyPolicyChecked() {
+		return util.doIsEnabled(privacyPolicyCheck);
+	}
+	
+	public String isNewsletterSelectedNo() {
+		return util.doGetInnerText(newsletterRadioBtn);
+	}
+	
+	public String getRegistrationPageTitle() {
+		return util.waitForTitleContains("Register", 200);
+	}
+	
+	public String getRegistrationPageURL() {
+		return util.waitForURLContains("route=account/register", 100);
 	}
 }

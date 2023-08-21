@@ -7,9 +7,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import com.qa.opencart.utils.ElementUtil;
+
 public class LoginPage {
 
 	private WebDriver driver;
+	private ElementUtil util;
 	
 	//1.private By locators
 	private By emailID = By.id("input-email");
@@ -32,11 +35,12 @@ public class LoginPage {
 	//2.public constructor
 	public LoginPage(WebDriver driver) {
 		this.driver = driver;
+		util = new ElementUtil(driver);
 	}
 	
 	//3.page actions/behavior
 	public String getLoginPageTitle() {
-		String title = driver.getTitle();
+		String title = util.waitForTitleIs("Account Login", 200);
 		System.out.println("Title of Login page : "+ title);
 		return title;
 	}
@@ -48,26 +52,26 @@ public class LoginPage {
 	}
 	
 	public boolean doesForgotPwdLinkExist() {
-		return driver.findElement(forgotPwdLink).isDisplayed();
+		return util.doIsDisplayed(forgotPwdLink);
 	}
 	
 	public AccountsPage doLogin(String un, String pwd) {
-		driver.findElement(emailID).sendKeys(un);
-		driver.findElement(password).sendKeys(pwd);
-		driver.findElement(loginBtn).click();
-		return new AccountsPage(driver); //TDD approach - Test Driven Development - Page chaining method
+		util.waitForElementPresence(emailID, 200).sendKeys(un);
+		util.doSendKeys(password, pwd);
+		util.doClick(loginBtn);
+		return new AccountsPage(driver); //TDD approach - Test Driven Development
 	}
 	
 	public boolean doesLogoExist() {
-		return driver.findElement(logo).isDisplayed();
+		return util.waitForElementVisible(logo, 2000).isDisplayed();
 	}
 	
 	public boolean doesNavBarExist() {
-		return driver.findElement(navBar).isDisplayed();
+		return util.doIsDisplayed(navBar);
 	}
 	
 	public List<String> allNavBarMenu() {
-		List<WebElement> menu = driver.findElements(navBarMenu);
+		List<WebElement> menu = util.getElements(navBarMenu);
 		List<String> list = new ArrayList<String>();
 		for(WebElement e : menu) {
 			list.add(e.getText());
@@ -76,11 +80,11 @@ public class LoginPage {
 	}
 	
 	public boolean doesBreadcrumbExist() {
-		return driver.findElement(breadcrumb).isDisplayed();
+		return util.doIsDisplayed(breadcrumb);
 	}
 	
 	public ArrayList<String> allBreadcrumnMenu() {
-		List<WebElement> menu = driver.findElements(breadcrumbMenu);
+		List<WebElement> menu = util.getElements(breadcrumbMenu);
 		ArrayList<String> list = new ArrayList<String>();
 		for(WebElement e : menu) {
 			list.add(e.getText());
@@ -89,7 +93,7 @@ public class LoginPage {
 	}
 	
 	public ArrayList<String> allColumnRightMenu() {
-		List<WebElement> menu = driver.findElements(columnrightMenu);
+		List<WebElement> menu = util.getElements(columnrightMenu);
 		ArrayList<String> list = new ArrayList<String>();
 		for(WebElement e : menu) {
 			list.add(e.getText());
@@ -98,7 +102,7 @@ public class LoginPage {
 	}
 	
 	public ArrayList<String> allFooterMenu() {
-		List<WebElement> menu = driver.findElements(footerMenu);
+		List<WebElement> menu = util.getElements(footerMenu);
 		ArrayList<String> list = new ArrayList<String>();
 		for(WebElement e : menu) {
 			list.add(e.getText());
@@ -107,7 +111,7 @@ public class LoginPage {
 	}
 	
 	public String isFooterText() {		
-		return driver.findElement(footerText).getText();
+		return util.doGetText(footerText);
 	}
 	
 }

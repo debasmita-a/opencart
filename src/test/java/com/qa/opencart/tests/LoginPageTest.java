@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
 
 import com.qa.opencart.base.BaseTest;
@@ -47,6 +48,13 @@ public class LoginPageTest extends BaseTest{
 	public void isFooterTextTest() {
 		String footerText = "Powered By OpenCart\nnaveenopencart © 2023";
 		Assert.assertEquals(loginPage.isFooterText(), footerText);
+	}
+	
+	@AfterClass
+	public void doLoginTest() {
+		accountsPage = loginPage.doLogin("debasmita5152@gmail.com", "TestOpen@23!");
+		Assert.assertTrue(accountsPage.doesLogoutLinkExist());
+		
 	}
 	
 	
