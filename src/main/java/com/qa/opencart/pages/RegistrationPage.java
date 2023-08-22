@@ -17,7 +17,7 @@ public class RegistrationPage {
 	private By telephone = By.id("input-telephone");
 	private By password = By.id("input-password");
 	private By pwdConfirm = By.id("input-confirm");
-	private By newsletterRadioBtn = By.name("newsletter");
+	private By newsletterRadioBtn = By.xpath("//label//input[@value = 0]");
 	private By privacyPolicyCheck = By.name("agree");
 	private By continueBtn = By.xpath("//input[@type='submit']");
 	
@@ -26,6 +26,7 @@ public class RegistrationPage {
 	
 	public RegistrationPage(WebDriver driver) {
 		this.driver = driver;
+		util = new ElementUtil(driver);
 	}
 	
 	public AccountCreatedPage doRegistration(String fName, String lName, String emailID, String tele, String pass, String passConfirm) {
@@ -35,7 +36,7 @@ public class RegistrationPage {
 		util.doSendKeys(telephone, tele);
 		util.doSendKeys(password, pass);
 		util.doSendKeys(pwdConfirm, pass);
-		driver.findElement(newsletterRadioBtn).getAttribute("checked");
+		//util.doGetAttributeValue(newsletterRadioBtn, "value");
 		util.doClick(privacyPolicyCheck);
 		util.doClick(continueBtn);
 		
@@ -47,7 +48,7 @@ public class RegistrationPage {
 	}
 	
 	public String isNewsletterSelectedNo() {
-		return util.doGetInnerText(newsletterRadioBtn);
+		return util.doGetAttributeValue(newsletterRadioBtn,"value");
 	}
 	
 	public String getRegistrationPageTitle() {

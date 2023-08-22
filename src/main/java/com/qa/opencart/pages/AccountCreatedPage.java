@@ -28,8 +28,9 @@ public class AccountCreatedPage {
 		return util.doIsDisplayed(editAccountLink);
 	}
 	
-	public void doContinue() {
+	public AccountsPage doContinue() {
 		util.doClick(continueBtn);
+		return new AccountsPage(driver);
 	}
 	
 	public String getAccountCreatedPageTitle() {

@@ -61,6 +61,10 @@ public class ElementUtil {
 		return getElement(locator).isEnabled();
 	}
 	
+	public String doGetAttributeValue(By locator, String attribute) {
+		return getElement(locator).getAttribute(attribute);
+	}
+	
 	public void clickOnElement(By locator, String value) {
 		List<WebElement> list = getElements(locator);
 		System.out.println(list.size());

@@ -34,11 +34,15 @@ public class AccountCreatedPageTest extends BaseTest {
 	
 	@Test
 	public void getAccountCreatedPageURLTest() {
+<<<<<<< HEAD
 		Assert.assertEquals(accCreatedPage.getAccountCreatedPageURL(), FrameworkConstants.ACCOUNT_CREATED_URL);
+=======
+		Assert.assertTrue(accCreatedPage.getAccountCreatedPageURL().contains("route=account/success"));
+>>>>>>> 749d5039b1f6e8b58862272a5150ae646b2931f1
 	}
 	
 	@AfterClass
 	public void doContinueTest() {
-		
+		Assert.assertEquals(accountsPage.getAccountsPageTitle(), "My Account");
 	}
 }

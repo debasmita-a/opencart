@@ -28,6 +28,7 @@ public class LoginPage {
 	private By columnrightMenu = By.xpath("//aside[@id='column-right']/div/a");
 	private By footerMenu = By.xpath("//div[@class='col-sm-3']/ul/li");
 	private By footerText = By.xpath("//div[@class='container']/p");
+	private By registerLink = By.linkText("Register");
 	
 	//Forgot password page
 	//New user- registration page
@@ -114,6 +115,12 @@ public class LoginPage {
 	public String isFooterText() {		
 		return util.doGetText(footerText);
 	}
+	
+	public RegistrationPage clickRegisterLink() {
+		util.doClick(registerLink);
+		return new RegistrationPage(driver);
+	}
+	
 	
 }
 
