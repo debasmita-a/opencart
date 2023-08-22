@@ -7,6 +7,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import com.qa.opencart.constants.FrameworkConstants;
 import com.qa.opencart.utils.ElementUtil;
 
 public class LoginPage {
@@ -40,7 +41,7 @@ public class LoginPage {
 	
 	//3.page actions/behavior
 	public String getLoginPageTitle() {
-		String title = util.waitForTitleIs("Account Login", 200);
+		String title = util.waitForTitleIs(FrameworkConstants.LOGIN_PAGE_TITLE_VALUE, FrameworkConstants.DEFAULT_MEDIUM_TIMEOUT);
 		System.out.println("Title of Login page : "+ title);
 		return title;
 	}
@@ -56,14 +57,14 @@ public class LoginPage {
 	}
 	
 	public AccountsPage doLogin(String un, String pwd) {
-		util.waitForElementPresence(emailID, 200).sendKeys(un);
+		util.waitForElementPresence(emailID, FrameworkConstants.DEFAULT_MEDIUM_TIMEOUT).sendKeys(un);
 		util.doSendKeys(password, pwd);
 		util.doClick(loginBtn);
 		return new AccountsPage(driver); //TDD approach - Test Driven Development
 	}
 	
 	public boolean doesLogoExist() {
-		return util.waitForElementVisible(logo, 2000).isDisplayed();
+		return util.waitForElementVisible(logo, FrameworkConstants.DEFAULT_MEDIUM_TIMEOUT).isDisplayed();
 	}
 	
 	public boolean doesNavBarExist() {

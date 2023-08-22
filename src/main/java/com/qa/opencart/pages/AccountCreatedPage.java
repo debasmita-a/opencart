@@ -3,6 +3,7 @@ package com.qa.opencart.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import com.qa.opencart.constants.FrameworkConstants;
 import com.qa.opencart.utils.ElementUtil;
 
 public class AccountCreatedPage {
@@ -32,11 +33,11 @@ public class AccountCreatedPage {
 	}
 	
 	public String getAccountCreatedPageTitle() {
-		return util.waitForTitleContains("Congratulations!", 200);
+		return util.waitForTitleContains("Congratulations!", FrameworkConstants.DEFAULT_MEDIUM_TIMEOUT);
 	}
 	
 	public String getAccountCreatedPageURL() {
-		return util.waitForURLContains("route=account/success", 100);
+		return util.waitForURLContains(FrameworkConstants.ACCOUNT_PAGE_URL, FrameworkConstants.DEFAULT_MEDIUM_TIMEOUT);
 	}
 	
 }

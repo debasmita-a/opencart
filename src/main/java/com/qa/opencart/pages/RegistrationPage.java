@@ -3,6 +3,7 @@ package com.qa.opencart.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import com.qa.opencart.constants.FrameworkConstants;
 import com.qa.opencart.utils.ElementUtil;
 
 public class RegistrationPage {
@@ -50,10 +51,10 @@ public class RegistrationPage {
 	}
 	
 	public String getRegistrationPageTitle() {
-		return util.waitForTitleContains("Register", 200);
+		return util.waitForTitleContains(FrameworkConstants.REGISTRATION_PAGE_TITLE_VALUE, FrameworkConstants.DEFAULT_MEDIUM_TIMEOUT);
 	}
 	
 	public String getRegistrationPageURL() {
-		return util.waitForURLContains("route=account/register", 100);
+		return util.waitForURLContains("route=account/register", FrameworkConstants.DEFAULT_MEDIUM_TIMEOUT);
 	}
 }

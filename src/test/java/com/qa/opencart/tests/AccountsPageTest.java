@@ -8,6 +8,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import com.qa.opencart.base.BaseTest;
+import com.qa.opencart.constants.FrameworkConstants;
 import com.qa.opencart.pages.AccountsPage;
 
 public class AccountsPageTest extends BaseTest{
@@ -29,12 +30,12 @@ public class AccountsPageTest extends BaseTest{
 	
 	@Test
 	public void getAccountsPageTitleTest() {
-		Assert.assertEquals(accountsPage.getAccountsPageTitle(), "My Account");
+		Assert.assertEquals(accountsPage.getAccountsPageTitle(), FrameworkConstants.ACCOUNT_PAGE_TITLE_VALUE);
 	}
 	
 	@Test
 	public void getAccountsPageURLTest() {
-		Assert.assertTrue(accountsPage.getAccountsPageURL().contains("route=account/account"));
+		Assert.assertTrue(accountsPage.getAccountsPageURL().contains(FrameworkConstants.ACCOUNT_PAGE_URL));
 	}
 	
 	@Test

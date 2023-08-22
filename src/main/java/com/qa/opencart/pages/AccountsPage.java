@@ -7,6 +7,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import com.qa.opencart.constants.FrameworkConstants;
 import com.qa.opencart.utils.ElementUtil;
 
 public class AccountsPage {
@@ -33,11 +34,11 @@ public class AccountsPage {
 	}
 	
 	public String getAccountsPageTitle() {
-		return util.waitForTitleIs("My Account", 2000);
+		return util.waitForTitleIs(FrameworkConstants.ACCOUNT_PAGE_TITLE_VALUE, FrameworkConstants.DEFAULT_MEDIUM_TIMEOUT);
 	}
 	
 	public String getAccountsPageURL() {
-		return util.waitForURLContains("route=account/account", 2000);
+		return util.waitForURLContains(FrameworkConstants.ACCOUNT_PAGE_URL, FrameworkConstants.DEFAULT_MEDIUM_TIMEOUT);
 	}
 	
 	public ArrayList<String> listAccountsHeaders() {
