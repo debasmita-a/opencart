@@ -13,8 +13,13 @@ public class AccountCreatedPageTest extends BaseTest {
 	
 	@BeforeClass
 	public AccountCreatedPage accCreatedPageSetUp() {
-		//continue part
-		return registrationPage.doRegistration("debasmitaTest", "test01", "debasmitaTest01@gmail.com", "123456789", "debasmitaTest", "debasmitaTest");
+		registrationPage = loginPage.clickRegisterLink();
+		return registrationPage.doRegistration(prop.getProperty("firstname").trim()
+				,prop.getProperty("lastname").trim()
+				,prop.getProperty("email")
+				,prop.getProperty("telephone")
+				,prop.getProperty("password")
+				,prop.getProperty("password"));
 	}
 
 	@Test
@@ -34,15 +39,11 @@ public class AccountCreatedPageTest extends BaseTest {
 	
 	@Test
 	public void getAccountCreatedPageURLTest() {
-<<<<<<< HEAD
-		Assert.assertEquals(accCreatedPage.getAccountCreatedPageURL(), FrameworkConstants.ACCOUNT_CREATED_URL);
-=======
-		Assert.assertTrue(accCreatedPage.getAccountCreatedPageURL().contains("route=account/success"));
->>>>>>> 749d5039b1f6e8b58862272a5150ae646b2931f1
+		Assert.assertTrue(accCreatedPage.getAccountCreatedPageURL().contains(FrameworkConstants.ACCOUNT_CREATED_URL));
 	}
 	
 	@AfterClass
 	public void doContinueTest() {
-		Assert.assertEquals(accountsPage.getAccountsPageTitle(), "My Account");
+		Assert.assertEquals(accCreatedPage.doContinue().getAccountsPageTitle(), FrameworkConstants.ACCOUNT_PAGE_TITLE_VALUE);
 	}
 }

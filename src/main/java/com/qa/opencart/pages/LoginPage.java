@@ -26,13 +26,10 @@ public class LoginPage {
 	private By breadcrumb = By.xpath("//ul[@class = 'breadcrumb']");
 	private By breadcrumbMenu = By.xpath("//ul[@class = 'breadcrumb']/li/a");
 	private By columnrightMenu = By.xpath("//aside[@id='column-right']/div/a");
+	private By footerHeaders = By.xpath("//div/h5");
 	private By footerMenu = By.xpath("//div[@class='col-sm-3']/ul/li");
 	private By footerText = By.xpath("//div[@class='container']/p");
 	private By registerLink = By.linkText("Register");
-	
-	//Forgot password page
-	//New user- registration page
-	//Accounts page
 	
 	//2.public constructor
 	public LoginPage(WebDriver driver) {
@@ -55,13 +52,6 @@ public class LoginPage {
 	
 	public boolean doesForgotPwdLinkExist() {
 		return util.doIsDisplayed(forgotPwdLink);
-	}
-	
-	public AccountsPage doLogin(String un, String pwd) {
-		util.waitForElementPresence(emailID, FrameworkConstants.DEFAULT_MEDIUM_TIMEOUT).sendKeys(un);
-		util.doSendKeys(password, pwd);
-		util.doClick(loginBtn);
-		return new AccountsPage(driver); //TDD approach - Test Driven Development
 	}
 	
 	public boolean doesLogoExist() {
@@ -103,17 +93,33 @@ public class LoginPage {
 		return list;
 	}
 	
-	public ArrayList<String> allFooterMenu() {
-		List<WebElement> menu = util.getElements(footerMenu);
-		ArrayList<String> list = new ArrayList<String>();
+	public List<String> allFooterHeaders(){
+		List<WebElement> menu = util.getElements(footerHeaders);
+		List<String> list = new ArrayList<String>();
 		for(WebElement e : menu) {
 			list.add(e.getText());
-		}	
+		}
+		return list;
+	}
+	
+	public List<String> allFooterMenu() {
+		List<WebElement> menu = util.getElements(footerMenu);
+		List<String> list = new ArrayList<String>();
+		for(WebElement e : menu) {
+			list.add(e.getText());
+		}
 		return list;
 	}
 	
 	public String isFooterText() {		
 		return util.doGetText(footerText);
+	}
+
+	public AccountsPage doLogin(String un, String pwd) {
+		util.waitForElementPresence(emailID, FrameworkConstants.DEFAULT_MEDIUM_TIMEOUT).sendKeys(un);
+		util.doSendKeys(password, pwd);
+		util.doClick(loginBtn);
+		return new AccountsPage(driver); //TDD approach - Test Driven Development
 	}
 	
 	public RegistrationPage clickRegisterLink() {

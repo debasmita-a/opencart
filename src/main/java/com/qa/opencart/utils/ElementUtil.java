@@ -4,6 +4,7 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Properties;
 
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
@@ -16,15 +17,22 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.qa.opencart.factory.DriverFactory;
+
 public class ElementUtil {
 
 	private WebDriver driver;
+	private JavaScriptUtils javaScriptUtil;
 	
 	public ElementUtil(WebDriver driver) {
 		this.driver = driver;
+		javaScriptUtil = new JavaScriptUtils(driver);
 	}
 	
 	public WebElement getElement(By locator) {
+		if(Boolean.parseBoolean(DriverFactory.highlight)) {
+			javaScriptUtil.flash(driver.findElement(locator));
+		}
 		return driver.findElement(locator);
 	}
 	
@@ -49,8 +57,8 @@ public class ElementUtil {
 		return getElement(locator).getAttribute("innerText");
 	}
 	
-	public void doGetInnerHTML(By locator) {
-		getElement(locator).getAttribute("innerHTML");
+	public String doGetInnerHTML(By locator) {
+		return getElement(locator).getAttribute("innerHTML");
 	}
 	
 	public boolean doIsDisplayed(By locator) {

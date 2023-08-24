@@ -41,9 +41,9 @@ public class AccountsPage {
 		return util.waitForURLContains(FrameworkConstants.ACCOUNT_PAGE_URL, FrameworkConstants.DEFAULT_MEDIUM_TIMEOUT);
 	}
 	
-	public ArrayList<String> listAccountsHeaders() {
+	public List<String> listAccountsHeaders() {
 		List<WebElement> list = util.getElements(accHeaders);
-		ArrayList<String> accHeaders = new ArrayList<String>();
+		List<String> accHeaders = new ArrayList<String>();
 		for(WebElement e : list) {
 			accHeaders.add(e.getText());
 		}		

@@ -1,8 +1,5 @@
 package com.qa.opencart.tests;
 
-import java.util.Arrays;
-import java.util.List;
-
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -15,7 +12,7 @@ public class AccountsPageTest extends BaseTest{
 	
 	@BeforeClass
 	public AccountsPage accPageSetUp() {
-		return loginPage.doLogin("debasmita5152@gmail.com", "TestOpen@23!");
+		return loginPage.doLogin(prop.getProperty("username").trim(), prop.getProperty("password").trim());
 	}
 
 	@Test
@@ -40,9 +37,10 @@ public class AccountsPageTest extends BaseTest{
 	
 	@Test
 	public void listAccountsHeadersTest() {
-		List<String> accHeaders = Arrays.asList("My Account","My Orders","My Affiliate Account","Newsletter");
-	    Assert.assertEquals(accountsPage.listAccountsHeaders(), accHeaders);
-	    Assert.assertEquals(accountsPage.listAccountsHeaders().size(), 4);
+		System.out.println("Actual account list headers: "+accountsPage.listAccountsHeaders());
+		System.out.println("Expected account list headers: "+FrameworkConstants.ACCOUNT_PAGE_HEADERS);
+	    Assert.assertEquals(accountsPage.listAccountsHeaders(), FrameworkConstants.ACCOUNT_PAGE_HEADERS);
+	    Assert.assertEquals(accountsPage.listAccountsHeaders().size(), FrameworkConstants.ACCOUNT_PAGE_HEADER_COUNT);
 	}
 	
 }

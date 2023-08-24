@@ -28,17 +28,17 @@ public class AccountCreatedPage {
 		return util.doIsDisplayed(editAccountLink);
 	}
 	
-	public AccountsPage doContinue() {
-		util.doClick(continueBtn);
-		return new AccountsPage(driver);
-	}
-	
 	public String getAccountCreatedPageTitle() {
-		return util.waitForTitleContains("Congratulations!", FrameworkConstants.DEFAULT_MEDIUM_TIMEOUT);
+		return util.waitForTitleContains(FrameworkConstants.ACCOUNT_CREATED_PAGE_TITLE_VALUE, FrameworkConstants.DEFAULT_MEDIUM_TIMEOUT);
 	}
 	
 	public String getAccountCreatedPageURL() {
-		return util.waitForURLContains(FrameworkConstants.ACCOUNT_PAGE_URL, FrameworkConstants.DEFAULT_MEDIUM_TIMEOUT);
+		return util.waitForURLContains(FrameworkConstants.ACCOUNT_CREATED_URL, FrameworkConstants.DEFAULT_MEDIUM_TIMEOUT);
+	}
+
+	public AccountsPage doContinue() {
+		util.doClick(continueBtn);
+		return new AccountsPage(driver);
 	}
 	
 }

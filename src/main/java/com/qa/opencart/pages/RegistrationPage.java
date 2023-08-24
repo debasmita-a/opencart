@@ -20,6 +20,8 @@ public class RegistrationPage {
 	private By newsletterRadioBtn = By.xpath("//label//input[@value = 0]");
 	private By privacyPolicyCheck = By.name("agree");
 	private By continueBtn = By.xpath("//input[@type='submit']");
+	private By accountAlreadyExistsText = By.xpath("//div//h1//following-sibling::p");
+	//private By accountAlreadyExistsLoginLink = By.xpath("//div//h1//following-sibling::p/a");
 	
 	//registration shouldn't be completed if Privacy policy is not checked.
 	//"Your Account has been created" success message
@@ -35,7 +37,7 @@ public class RegistrationPage {
 		util.doSendKeys(email, emailID);
 		util.doSendKeys(telephone, tele);
 		util.doSendKeys(password, pass);
-		util.doSendKeys(pwdConfirm, pass);
+		util.doSendKeys(pwdConfirm, passConfirm);
 		//util.doGetAttributeValue(newsletterRadioBtn, "value");
 		util.doClick(privacyPolicyCheck);
 		util.doClick(continueBtn);
@@ -47,8 +49,9 @@ public class RegistrationPage {
 		return util.doIsEnabled(privacyPolicyCheck);
 	}
 	
-	public String isNewsletterSelectedNo() {
-		return util.doGetAttributeValue(newsletterRadioBtn,"value");
+	public boolean isNewsletterSelectedNo() {
+		System.out.println("Innertext of Radio button selected : "+util.doGetText(newsletterRadioBtn));
+		return util.doGetAttributeValue(newsletterRadioBtn,"value").equalsIgnoreCase(FrameworkConstants.REGISTRATION_PAGE_NEWSLETTER_RADIO_VALUE);
 	}
 	
 	public String getRegistrationPageTitle() {
@@ -57,5 +60,9 @@ public class RegistrationPage {
 	
 	public String getRegistrationPageURL() {
 		return util.waitForURLContains("route=account/register", FrameworkConstants.DEFAULT_MEDIUM_TIMEOUT);
+	}
+	
+	public String msgUserAccountAlreadyExists() {
+		return util.doGetInnerText(accountAlreadyExistsText);
 	}
 }
