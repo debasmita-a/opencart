@@ -11,6 +11,7 @@ import com.qa.opencart.pages.AccountCreatedPage;
 import com.qa.opencart.pages.AccountsPage;
 import com.qa.opencart.pages.LoginPage;
 import com.qa.opencart.pages.RegistrationPage;
+import com.qa.opencart.pages.SearchPage;
 
 public class BaseTest {
 
@@ -22,6 +23,7 @@ public class BaseTest {
 	protected AccountsPage accountsPage;
 	protected RegistrationPage registrationPage;
 	protected AccountCreatedPage accCreatedPage;
+	protected SearchPage searchPage;
 	
 	@BeforeTest
 	public void setUp() {
@@ -32,6 +34,7 @@ public class BaseTest {
 		accountsPage = new AccountsPage(driver);
 		registrationPage = new RegistrationPage(driver);
 		accCreatedPage = new AccountCreatedPage(driver);
+		searchPage = new SearchPage(driver);
 	}
 	
 	@AfterTest

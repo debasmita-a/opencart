@@ -17,6 +17,7 @@ public class AccountsPage {
 	
 	private By logoutLink = By.linkText("Logout");
 	private By searchBox = By.name("search");
+	private By searchButton = By.cssSelector("#search button");
 	private By accHeaders = By.xpath("//h2");
 	
 	
@@ -48,6 +49,17 @@ public class AccountsPage {
 			accHeaders.add(e.getText());
 		}		
 		return accHeaders;
+	}
+	
+	public SearchPage doSearch(String searchKey) {
+		if(doesSearchBoxExist()) {
+			util.doSendKeys(searchBox, searchKey);
+			util.doClick(searchButton);
+			return new SearchPage(driver);
+		}else {
+			System.out.println("Search box is not available on this page..");
+			return null;
+		}
 	}
 	
 }

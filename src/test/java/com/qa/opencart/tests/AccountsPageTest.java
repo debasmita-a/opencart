@@ -1,6 +1,7 @@
 package com.qa.opencart.tests;
 
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -41,6 +42,12 @@ public class AccountsPageTest extends BaseTest{
 		System.out.println("Expected account list headers: "+FrameworkConstants.ACCOUNT_PAGE_HEADERS);
 	    Assert.assertEquals(accountsPage.listAccountsHeaders(), FrameworkConstants.ACCOUNT_PAGE_HEADERS);
 	    Assert.assertEquals(accountsPage.listAccountsHeaders().size(), FrameworkConstants.ACCOUNT_PAGE_HEADER_COUNT);
+	}
+	
+	@AfterClass
+	public void searchProuductCountTest() {
+		searchPage = accountsPage.doSearch("Macbook");
+		Assert.assertTrue(searchPage.getSearchProductCount()>0);
 	}
 	
 }
