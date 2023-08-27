@@ -1,8 +1,8 @@
 package com.qa.opencart.tests;
 
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import com.qa.opencart.base.BaseTest;
@@ -44,10 +44,42 @@ public class AccountsPageTest extends BaseTest{
 	    Assert.assertEquals(accountsPage.listAccountsHeaders().size(), FrameworkConstants.ACCOUNT_PAGE_HEADER_COUNT);
 	}
 	
-	@AfterClass
-	public void searchProuductCountTest() {
-		searchPage = accountsPage.doSearch("Macbook");
+	@DataProvider //Delta test approach 
+	public Object[][] getProductData() {
+		return new Object[][] {
+			{"MacBook"},
+			{"iMac"},
+			{"Apple"},
+			{"Samsung"}
+		};
+	}
+	
+	@Test(dataProvider = "getProductData")
+	public void searchProductCountTest(String searchKey) {
+		searchPage = accountsPage.doSearch(searchKey);
 		Assert.assertTrue(searchPage.getSearchProductCount()>0);
+	}
+	
+	@DataProvider
+	public Object[][] getProductTestData() {
+		return new Object[][] {
+			{"MacBook", "MacBook Air"},
+			{"MacBook", "MacBook Pro"},
+			{"MacBook", "MacBook"},
+			{"iMac", "iMac"},
+			{"Apple", "Apple Cinema 30\""},
+			{"Samsung", "Samsung SyncMaster 941BW"},
+			{"Samsung", "Samsung Galaxy Tab 10.1"}
+		};
+	}
+	
+	@Test(dataProvider = "getProductTestData")
+	public void selectProductTest(String searchKey, String productName) {
+		searchPage = accountsPage.doSearch(searchKey);
+		if(searchPage.getSearchProductCount()>0) {
+			productInfoPage = searchPage.selectProduct(productName);
+		}
+		Assert.assertEquals(productInfoPage.getProductTitle(), productName);
 	}
 	
 }

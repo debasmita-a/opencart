@@ -12,6 +12,7 @@ public class SearchPage {
 	private ElementUtil util;
 	
 	private By searchProductResults = By.cssSelector("div#content div.product-layout");
+//  private By searchProductResults = By.xpath("//div[@id = 'content']//div[@class = 'product-thumb']");
 	
 	public SearchPage(WebDriver driver) {
 		this.driver = driver;
