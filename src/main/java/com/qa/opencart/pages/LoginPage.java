@@ -122,7 +122,7 @@ public class LoginPage {
 		return new AccountsPage(driver); //TDD approach - Test Driven Development
 	}
 	
-	public RegistrationPage clickRegisterLink() {
+	public RegistrationPage navigateToRegisterPage() {
 		util.doClick(registerLink);
 		return new RegistrationPage(driver);
 	}

@@ -12,14 +12,9 @@ import com.qa.opencart.pages.AccountCreatedPage;
 public class AccountCreatedPageTest extends BaseTest {
 	
 	@BeforeClass
-	public AccountCreatedPage accCreatedPageSetUp() {
-		registrationPage = loginPage.clickRegisterLink();
-		return registrationPage.doRegistration(prop.getProperty("firstname").trim()
-				,prop.getProperty("lastname").trim()
-				,prop.getProperty("email")
-				,prop.getProperty("telephone")
-				,prop.getProperty("password")
-				,prop.getProperty("password"));
+	public void accCreatedPageSetUp() {
+		registrationPage = loginPage.navigateToRegisterPage();
+		
 	}
 
 	@Test

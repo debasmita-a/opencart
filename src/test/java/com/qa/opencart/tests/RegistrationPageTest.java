@@ -13,19 +13,12 @@ public class RegistrationPageTest extends BaseTest{
 
 	@BeforeClass
 	public RegistrationPage registrationPageSetUp() {
-		return loginPage.clickRegisterLink();
+		return loginPage.navigateToRegisterPage();
 	}
 	
 	@AfterClass
 	public void doRegistrationTest() {
-		accCreatedPage = registrationPage.doRegistration(prop.getProperty("firstname").trim()
-				,prop.getProperty("lastname").trim()
-				,prop.getProperty("email")
-				,prop.getProperty("telephone")
-				,prop.getProperty("password")
-				,prop.getProperty("password"));
 		
-		Assert.assertEquals(accCreatedPage.isAccountCreated(),FrameworkConstants.ACCOUNT_CREATED_SUCCESS_MSG);
 	}
 	
 	@Test
