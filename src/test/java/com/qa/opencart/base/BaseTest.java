@@ -5,6 +5,7 @@ import java.util.Properties;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
+import org.testng.asserts.SoftAssert;
 
 import com.qa.opencart.factory.DriverFactory;
 import com.qa.opencart.pages.AccountCreatedPage;
@@ -19,6 +20,8 @@ public class BaseTest {
 	DriverFactory df;
 	WebDriver driver;
 	protected Properties prop;
+	
+	protected SoftAssert softAssert;
 	
 	protected LoginPage loginPage;
 	protected AccountsPage accountsPage;
