@@ -17,32 +17,48 @@ public class RegistrationPage {
 	private By telephone = By.id("input-telephone");
 	private By password = By.id("input-password");
 	private By pwdConfirm = By.id("input-confirm");
-	private By newsletterRadioBtn = By.xpath("//label//input[@value = 0]");
+
+	private By subscribeYes = By.xpath("//label[normalize-space()='Yes']/input[@type = 'radio']");
+	private By subscribeNo = By.xpath("//label[normalize-space()='No']/input[@type = 'radio']");
 	private By privacyPolicyCheck = By.name("agree");
 	private By continueBtn = By.xpath("//input[@type='submit']");
 	private By accountAlreadyExistsText = By.xpath("//div//h1//following-sibling::p");
-	//private By accountAlreadyExistsLoginLink = By.xpath("//div//h1//following-sibling::p/a");
 	
-	//registration shouldn't be completed if Privacy policy is not checked.
-	//"Your Account has been created" success message
+	private By logoutLink = By.linkText("Logout");
+	private By registerLink = By.linkText("Register");
+	
+	private By successMsg = By.xpath("//div[@id = 'content']/p[1]");
 	
 	public RegistrationPage(WebDriver driver) {
 		this.driver = driver;
 		util = new ElementUtil(driver);
 	}
 	
-	public AccountCreatedPage doRegistration(String fName, String lName, String emailID, String tele, String pass, String passConfirm) {
-		util.doSendKeys(firstName, fName);
-		util.doSendKeys(lastName, lName);
-		util.doSendKeys(email, emailID);
-		util.doSendKeys(telephone, tele);
-		util.doSendKeys(password, pass);
-		util.doSendKeys(pwdConfirm, passConfirm);
-		//util.doGetAttributeValue(newsletterRadioBtn, "value");
+	public boolean doRegistration(String firstName, String lastName, String email, 
+			String telephone, String password, String subscribe) {
+		util.doSendKeys(this.firstName, firstName);
+		util.doSendKeys(this.lastName, lastName);
+		util.doSendKeys(this.email, email);
+		util.doSendKeys(this.telephone, telephone);
+		util.doSendKeys(this.password, password);
+		util.doSendKeys(pwdConfirm, password);
+		
+		if(subscribe.equalsIgnoreCase("yes")) {
+			util.doClick(subscribeYes);
+		}else {
+			util.doClick(subscribeNo);
+		}
 		util.doClick(privacyPolicyCheck);
 		util.doClick(continueBtn);
 		
-		return 	new AccountCreatedPage(driver);
+		String successMessage = util.waitForElementVisible(successMsg, FrameworkConstants.DEFAULT_MEDIUM_TIMEOUT).getText();
+		if(successMessage.equals(FrameworkConstants.ACCOUNT_CREATED_SUCCESS_MSG)) {
+			util.doClick(logoutLink);
+			util.doClick(registerLink);
+			return true;
+		}
+		
+		return false;
 	}
 	
 	public boolean isPrivacyPolicyChecked() {
@@ -50,8 +66,8 @@ public class RegistrationPage {
 	}
 	
 	public boolean isNewsletterSelectedNo() {
-		System.out.println("Innertext of Radio button selected : "+util.doGetText(newsletterRadioBtn));
-		return util.doGetAttributeValue(newsletterRadioBtn,"value").equalsIgnoreCase(FrameworkConstants.REGISTRATION_PAGE_NEWSLETTER_RADIO_VALUE);
+		System.out.println("Innertext of Radio button selected : "+util.doGetText(subscribeNo));
+		return util.doGetAttributeValue(subscribeNo,"value").equalsIgnoreCase(FrameworkConstants.REGISTRATION_PAGE_NEWSLETTER_RADIO_VALUE);
 	}
 	
 	public String getRegistrationPageTitle() {
