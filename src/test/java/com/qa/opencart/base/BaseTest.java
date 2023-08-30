@@ -37,6 +37,9 @@ public class BaseTest {
 		driver = df.initDriver(prop);
 		loginPage = new LoginPage(driver);
 		accountsPage = new AccountsPage(driver);
+		registrationPage = new RegistrationPage(driver);
+		
+		softAssert = new SoftAssert();
 	}
 	
 	@AfterTest

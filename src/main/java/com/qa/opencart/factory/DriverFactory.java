@@ -19,13 +19,14 @@ public class DriverFactory {
 	
 	public static String highlight;
 	
+	public ThreadLocal<WebDriver> tlDriver;
+	
 	/**
 	 * This method is initializing the driver on the basis of given browser name
 	 * @param browserName
 	 * @return the driver
 	 */
 	public WebDriver initDriver(Properties prop) {
-		
 		optionManager = new OptionsManager(prop);
 		highlight = prop.getProperty("highlight").trim();
 		System.out.println("Browser name is : "+ prop.getProperty("browser").toLowerCase().trim());

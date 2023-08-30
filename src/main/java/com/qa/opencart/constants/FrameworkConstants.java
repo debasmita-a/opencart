@@ -31,4 +31,6 @@ public class FrameworkConstants {
 	public static final List<String> ALL_FOOTER_HEADERS = Arrays.asList("Information", "Customer Service", "Extras", "My Account");
 			
 	public static final String REGISTRATION_PAGE_NEWSLETTER_RADIO_VALUE = "0";
+	public static final String REGISTER_SHEET_NAME = "register";
+	public static final String PRODUCT_INFO_SHEET = "productinfo";
 }

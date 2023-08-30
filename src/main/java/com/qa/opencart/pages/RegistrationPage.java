@@ -48,7 +48,7 @@ public class RegistrationPage {
 		}else {
 			util.doClick(subscribeNo);
 		}
-		util.doClick(privacyPolicyCheck);
+		util.doActionsClick(privacyPolicyCheck);
 		util.doClick(continueBtn);
 		
 		String successMessage = util.waitForElementVisible(successMsg, FrameworkConstants.DEFAULT_MEDIUM_TIMEOUT).getText();
@@ -56,8 +56,7 @@ public class RegistrationPage {
 			util.doClick(logoutLink);
 			util.doClick(registerLink);
 			return true;
-		}
-		
+		}		
 		return false;
 	}
 	

@@ -1,13 +1,16 @@
 package com.qa.opencart.tests;
 
+import java.util.Random;
+
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import com.qa.opencart.base.BaseTest;
 import com.qa.opencart.constants.FrameworkConstants;
 import com.qa.opencart.pages.RegistrationPage;
+import com.qa.opencart.utils.ExcelUtil;
 
 public class RegistrationPageTest extends BaseTest{
 
@@ -16,9 +19,24 @@ public class RegistrationPageTest extends BaseTest{
 		return loginPage.navigateToRegisterPage();
 	}
 	
-	@AfterClass
-	public void doRegistrationTest() {
-		
+	@DataProvider
+	public Object[][] getTestdata() {
+		Object[][] registerData = ExcelUtil.getTestData(FrameworkConstants.REGISTER_SHEET_NAME);
+		return registerData;
+	}
+	//Generate random emails test data
+	public String getEmail() {
+		Random random = new Random();
+		//String email = "automation"+random.nextInt(1000)+"@gmail.com";
+		String email = "automation"+System.currentTimeMillis()+"@gmail.com";
+		return email;
+	}
+	
+	@Test(dataProvider = "getTestdata")
+	public void doRegistrationTest(String firstName, String lastName, 
+			String telephone, String password, String subscribe) {
+		Assert.assertTrue(registrationPage.doRegistration(firstName, lastName, getEmail(), 
+				telephone, password, subscribe));
 	}
 	
 	@Test
