@@ -38,7 +38,7 @@ public class BaseTest {
 		loginPage = new LoginPage(driver);
 		accountsPage = new AccountsPage(driver);
 		registrationPage = new RegistrationPage(driver);
-		
+		productInfoPage = new ProductInfoPage(driver);
 		softAssert = new SoftAssert();
 	}
 	
