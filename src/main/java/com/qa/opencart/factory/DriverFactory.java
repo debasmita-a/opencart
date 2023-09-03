@@ -12,6 +12,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.io.FileHandler;
 import org.openqa.selenium.safari.SafariDriver;
 
 public class DriverFactory {
@@ -92,7 +93,7 @@ public class DriverFactory {
 		String path = System.getProperty("user.dir") + "/screenshot/" + System.currentTimeMillis() + ".png";
 		File destination = new File(path);
 		try {
-			FileUtil.copyFile(srcFile, destination);
+			FileHandler.copy(srcFile,destination);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
