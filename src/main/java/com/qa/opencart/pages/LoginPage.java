@@ -10,6 +10,8 @@ import org.openqa.selenium.WebElement;
 import com.qa.opencart.constants.FrameworkConstants;
 import com.qa.opencart.utils.ElementUtil;
 
+import io.qameta.allure.Step;
+
 public class LoginPage {
 
 	private WebDriver driver;
@@ -38,18 +40,21 @@ public class LoginPage {
 	}
 	
 	//3.page actions/behavior
+	@Step("..getting the login page title..")
 	public String getLoginPageTitle() {
 		String title = util.waitForTitleIs(FrameworkConstants.LOGIN_PAGE_TITLE_VALUE, FrameworkConstants.DEFAULT_MEDIUM_TIMEOUT);
 		System.out.println("Title of Login page : "+ title);
 		return title;
 	}
 	
+	@Step("..getting the login page url..")
 	public String getLoginPageURL() {
 		String url = driver.getCurrentUrl();
 		System.out.println("Login page URL is : "+url);
 		return url;
 	}
 	
+	@Step("..checking the forgot password link exists..")
 	public boolean doesForgotPwdLinkExist() {
 		return util.doIsDisplayed(forgotPwdLink);
 	}
@@ -115,6 +120,7 @@ public class LoginPage {
 		return util.doGetText(footerText);
 	}
 
+	@Step("..login with username: {0} and password: {1}")
 	public AccountsPage doLogin(String un, String pwd) {
 		util.waitForElementPresence(emailID, FrameworkConstants.DEFAULT_MEDIUM_TIMEOUT).sendKeys(un);
 		util.doSendKeys(password, pwd);
@@ -122,6 +128,7 @@ public class LoginPage {
 		return new AccountsPage(driver); //TDD approach - Test Driven Development
 	}
 	
+	@Step("..navigating to registration page..")
 	public RegistrationPage navigateToRegisterPage() {
 		util.doClick(registerLink);
 		return new RegistrationPage(driver);
