@@ -72,7 +72,18 @@ public class DriverFactory {
 	 * @return
 	 */
 	public Properties initProp(){
+		//mvn clean install -Denv=stage"
+		//mvn clean install
+		
 		prop = new Properties();
+		
+		String envName = System.getProperty("env");
+		System.out.println("Running test cases on Env: "+envName);
+		
+		if(envName==null) {
+			System.out.println("No env passed. Running tests on QA env..");
+			
+		}
 		try {
 			FileInputStream ip = new FileInputStream("./src/test/resources/config/config.properties");
 			prop.load(ip);
