@@ -15,6 +15,8 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.io.FileHandler;
 import org.openqa.selenium.safari.SafariDriver;
 
+import com.qa.opencart.exceptions.FrameworkException;
+
 public class DriverFactory {
 
 	public WebDriver driver;
@@ -71,28 +73,51 @@ public class DriverFactory {
 	 * This method is reading the properties from .properties file
 	 * @return
 	 */
-	public Properties initProp(){
-		//mvn clean install -Denv=stage"
-		//mvn clean install
-		
+	public Properties initProp() {
+
+		// mvn clean install -Denv="qa"
+		// mvn clean install
 		prop = new Properties();
-		
+		FileInputStream ip = null;
 		String envName = System.getProperty("env");
-		System.out.println("Running test cases on Env: "+envName);
-		
-		if(envName==null) {
-			System.out.println("No env passed. Running tests on QA env..");
-			
-		}
+		System.out.println("Running test cases on Env: " + envName);
+
 		try {
-			FileInputStream ip = new FileInputStream("./src/test/resources/config/config.properties");
-			prop.load(ip);
+			if (envName == null) {
+				System.out.println("no env is passed....Running tests on QA env...");
+				ip = new FileInputStream("./src/test/resources/config/qa.config.properties");
+			} else {
+				switch (envName.toLowerCase().trim()) {
+				case "qa":
+					ip = new FileInputStream("./src/test/resources/config/qa.config.properties");
+					break;
+				case "stage":
+					ip = new FileInputStream("./src/test/resources/config/stage.config.properties");
+					break;
+				case "dev":
+					ip = new FileInputStream("./src/test/resources/config/dev.config.properties");
+					break;
+				case "prod":
+					ip = new FileInputStream("./src/test/resources/config/config.properties");
+					break;
+
+				default:
+					System.out.println("....Wrong env is passed....No need to run the test cases....");
+					//throw new FrameworkException("WRONG ENV IS PASSED...");
+				// break;
+				}
+
+			}
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+
+		}
+
+		try {
+			prop.load(ip);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 		return prop;
 	}
 	
