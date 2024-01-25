@@ -29,6 +29,7 @@ public class LoginPage {
 	private By warningMessage = By.xpath("//div[contains(@class,'alert-dismissible')]"); //getInnerText
 	private By logoutLink = By.linkText("Logout");
 	private By myAccDropdownBtn = By.xpath("//a[@title='My Account']");
+	private By logoutContinueBtn = By.linkText("Continue");
 	
 	//page actions
 	public String getLoginPageTitle() {
@@ -53,9 +54,11 @@ public class LoginPage {
 		util.doClick(loginBtn);
 	}
 	
-	public void doLogout() { //utility to page class
+	public HomePage doLogout() { //utility to page class
 		util.doClick(myAccDropdownBtn);
 		util.doClick(logoutLink);
+		util.doClick(logoutContinueBtn);
+		return new HomePage(driver);
 	}
 	
 	public String negativeLogin(String email, String pwd) {	

@@ -1,6 +1,7 @@
 package com.qa.opencart.tests;
 
 import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -8,6 +9,11 @@ import com.qa.opencart.base.BaseTest;
 import com.qa.opencart.constants.FrameworkConstants;
 
 public class LoginPageTest extends BaseTest{
+	
+	@BeforeClass
+	public void loginPageSetup() {
+		loginPage = homePage.navigateToLoginPage();
+	}
 
 	@Test
 	public void getLoginPageTitleTest() {
@@ -40,5 +46,6 @@ public class LoginPageTest extends BaseTest{
 	@Test
 	public void doLoginTest() {
 		Assert.assertEquals(loginPage.doLogin(prop.getProperty("username"), prop.getProperty("password")), FrameworkConstants.ACCOUNT_PAGE_TITLE);
+		homePage.navigateToLoginPage();
 	}
 }
