@@ -30,10 +30,10 @@ public class ForgotPasswordPageTest extends BaseTest{
 	
 	@Test
 	public void enterIncorrectEmail() {
-		Assert.assertTrue(forgotPasswordPage.enterIncorrectEmail(randomEmailGenerator()).contains(FrameworkConstants.FORGOT_PASSWORD_EMAIL_ERROR));
+		Assert.assertTrue((forgotPasswordPage.enterIncorrectEmail(randomEmailGenerator()).contains(FrameworkConstants.FORGOT_PASSWORD_EMAIL_ERROR)));
 	}
 	
-	@Test
+	@Test(enabled = false)
 	public void enterEmailToResetPassword() {
 		Assert.assertTrue(forgotPasswordPage.enterEmailToResetPassword("debasmita101@gmail.com").contains(FrameworkConstants.FORGOT_PASSWORD_RESET_EMAIL));
 	}

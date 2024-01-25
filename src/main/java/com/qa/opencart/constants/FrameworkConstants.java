@@ -8,6 +8,7 @@ public class FrameworkConstants {
 	public static final String PASSWORD_CHAR_ERROR = "Password must be between 4 and 20 characters!";
 	public static final String PASSWORD_MISMATCH_ERROR = "Password confirmation does not match password!";
 	public static final String FORGOT_PASSWORD_EMAIL_ERROR = " Warning: The E-Mail Address was not found in our records, please try again!";
+	public static final String FORGOT_PASSWORD_EMAIL_ERROR2 = "  Warning: Your account has exceeded allowed number of login attempts. Please try again in 1 hour.";
 	
 	//SuccessMsg:
 	public static final String ACCOUNT_CREATED_MSG = "Your Account Has Been Created!";
