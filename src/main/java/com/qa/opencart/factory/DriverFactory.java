@@ -23,11 +23,14 @@ public class DriverFactory {
 
 	private WebDriver driver;
 	private Properties prop;
+	private OptionsManager optionManager;
 
 	public static ThreadLocal<WebDriver> tlDriver = new ThreadLocal<WebDriver>();
 
 	public WebDriver initDriver(Properties prop) {
+		
 		prop = initProp();
+		optionManager = new OptionsManager(prop);
 
 		String browserName = prop.getProperty("browser").toLowerCase().trim();
 		
@@ -70,13 +73,13 @@ public class DriverFactory {
 		try {
 			switch (browser) {
 			case "chrome":
-				tlDriver.set(new RemoteWebDriver(new URL(prop.getProperty("huburl")), null));
+				tlDriver.set(new RemoteWebDriver(new URL(prop.getProperty("huburl")), optionManager.getChomeOptions()));
 				break;
 			case "firefox":
-				tlDriver.set(new RemoteWebDriver(new URL(prop.getProperty("huburl")), null));
+				tlDriver.set(new RemoteWebDriver(new URL(prop.getProperty("huburl")), optionManager.getFirefoxOptions()));
 				break;
 			case "edge":
-				tlDriver.set(new RemoteWebDriver(new URL(prop.getProperty("huburl")), null));
+				tlDriver.set(new RemoteWebDriver(new URL(prop.getProperty("huburl")), optionManager.getEdgeOptions()));
 				break;
 
 			default:
