@@ -5,6 +5,7 @@ import java.util.Properties;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Parameters;
 
 import com.qa.opencart.factory.DriverFactory;
 import com.qa.opencart.pages.ForgottenYourPasswordPage;
@@ -19,10 +20,16 @@ public class BaseTest {
 	protected LoginPage loginPage;
 	protected ForgottenYourPasswordPage forgotPasswordPage;
 	
+	@Parameters({"browser"})
 	@BeforeTest
-	public void setup() {
+	public void setup(String browserName) {
 		DriverFactory df = new DriverFactory();
 		prop = df.initProp();
+		
+		if(browserName!=null) {
+			prop.setProperty("browser", browserName);
+		}
+		
 		driver = df.initDriver(prop);
 		homePage = new HomePage(driver);
 	}

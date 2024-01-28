@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Properties;
 
 import org.openqa.selenium.OutputType;
@@ -13,48 +15,83 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.io.FileHandler;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 import com.qa.opencart.exceptions.FrameworkExceptions;
-
-import jdk.javadoc.internal.doclets.toolkit.util.DocFinder.Output;
 
 public class DriverFactory {
 
 	private WebDriver driver;
 	private Properties prop;
-	
+
 	public static ThreadLocal<WebDriver> tlDriver = new ThreadLocal<WebDriver>();
 
 	public WebDriver initDriver(Properties prop) {
 		prop = initProp();
+
+		String browserName = prop.getProperty("browser").toLowerCase().trim();
 		
-		switch (prop.getProperty("browser").toLowerCase().trim()) {
-		case "chrome":
-			//driver = new ChromeDriver();
+		//chrome
+		if(Boolean.parseBoolean(prop.getProperty("remote"))) {
+			init_remoteDriver("chrome");
+		}else {
 			tlDriver.set(new ChromeDriver());
-			break;
-		case "firefox":
-			//driver = new FirefoxDriver();
-			tlDriver.set(new FirefoxDriver());
-			break;
-		case "edge":
-			//driver = new EdgeDriver();
-			tlDriver.set(new EdgeDriver());
-			break;
-		default:
-			System.out.println("Provide a correct browser name.");
-			new FrameworkExceptions("IncorrectBrowserNameException");
-			break;
 		}
 		
+		//firefox
+		if(Boolean.parseBoolean(prop.getProperty("remote"))) {
+			init_remoteDriver("firefox");
+		}else {
+			tlDriver.set(new FirefoxDriver());
+		}
+		
+		//edge
+		if(Boolean.parseBoolean(prop.getProperty("remote"))) {
+			init_remoteDriver("edge");
+		}else {
+			tlDriver.set(new EdgeDriver());
+		}
+
 		getDriver().get(prop.getProperty("url"));
 		getDriver().manage().window().maximize();
 		getDriver().manage().deleteAllCookies();
-		
+
 		return getDriver();
 
 	}
-	
+
+	/**
+	 * this method is used to initialize the driver with RemoteWebDriver
+	 * 
+	 * @param browser
+	 */
+	private void init_remoteDriver(String browser) {
+		System.out.println("Running tests on selenium grid server:::" + browser);
+		try {
+			switch (browser) {
+			case "chrome":
+				tlDriver.set(new RemoteWebDriver(new URL(prop.getProperty("huburl")), null));
+				break;
+			case "firefox":
+				tlDriver.set(new RemoteWebDriver(new URL(prop.getProperty("huburl")), null));
+				break;
+			case "edge":
+				tlDriver.set(new RemoteWebDriver(new URL(prop.getProperty("huburl")), null));
+				break;
+
+			default:
+				System.out.println("Please pass correct browser for remote execution.." + browser);
+				new FrameworkExceptions("NOREMOTEBROWSEREXCEPTION");
+			}
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * this method will return the ThreadLocal<WebDriver> tlDriver instance
+	 * @return tlDriver
+	 */
 	public static WebDriver getDriver() {
 		return tlDriver.get();
 	}
@@ -71,17 +108,17 @@ public class DriverFactory {
 		}
 		return prop;
 	}
-	
+
 	public static String getScreenshot() {
-		File srcFile = ((TakesScreenshot)getDriver()).getScreenshotAs(OutputType.FILE);
-		String path = System.getProperty("user.dir")+"/screenshot/"+System.currentTimeMillis()+".png";
+		File srcFile = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.FILE);
+		String path = System.getProperty("user.dir") + "/screenshot/" + System.currentTimeMillis() + ".png";
 		File destination = new File(path);
 		try {
 			FileHandler.copy(srcFile, destination);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 		return path;
 	}
 }

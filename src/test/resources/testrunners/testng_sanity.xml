@@ -12,8 +12,9 @@
 			<class name="com.qa.opencart.tests.HomePageTest" />
 		</classes>
 	</test>
-		<test name="Login Page Test">
+	<test name="Login Page Test">
 		<classes>
 			<class name="com.qa.opencart.tests.LoginPageTest" />
 		</classes>
+	</test>
 </suite>
