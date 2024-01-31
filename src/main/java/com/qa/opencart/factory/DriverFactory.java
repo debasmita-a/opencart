@@ -27,6 +27,12 @@ public class DriverFactory {
 
 	public static ThreadLocal<WebDriver> tlDriver = new ThreadLocal<WebDriver>();
 
+	/**
+	 * this method will initialize the WebDriver
+	 * 
+	 * @param prop
+	 * @return
+	 */
 	public WebDriver initDriver(Properties prop) {
 		
 		prop = initProp();
@@ -34,26 +40,27 @@ public class DriverFactory {
 
 		String browserName = prop.getProperty("browser").toLowerCase().trim();
 		
-		//chrome
-		if(Boolean.parseBoolean(prop.getProperty("remote"))) {
-			init_remoteDriver("chrome");
+		if(browserName.equalsIgnoreCase("chrome")) {
+			if(Boolean.parseBoolean(prop.getProperty("remote"))) {
+				init_remoteDriver("chrome");
+			}else {
+				tlDriver.set(new ChromeDriver(optionManager.getChromeOptions()));
+			}
+		}else if(browserName.equalsIgnoreCase("firefox")) {
+			if(Boolean.parseBoolean(prop.getProperty("remote"))) {
+				init_remoteDriver("firefox");
+			}else {
+				tlDriver.set(new FirefoxDriver(optionManager.getFirefoxOptions()));
+			}
+		}else if(browserName.equalsIgnoreCase("edge")){
+			if(Boolean.parseBoolean(prop.getProperty("remote"))) {
+				init_remoteDriver("edge");
+			}else {
+				tlDriver.set(new EdgeDriver(optionManager.getEdgeOptions()));
+			}
 		}else {
-			tlDriver.set(new ChromeDriver());
-		}
-		
-		//firefox
-		if(Boolean.parseBoolean(prop.getProperty("remote"))) {
-			init_remoteDriver("firefox");
-		}else {
-			tlDriver.set(new FirefoxDriver());
-		}
-		
-		//edge
-		if(Boolean.parseBoolean(prop.getProperty("remote"))) {
-			init_remoteDriver("edge");
-		}else {
-			tlDriver.set(new EdgeDriver());
-		}
+			System.out.println("Provide a correct browser name.");
+		}	
 
 		getDriver().get(prop.getProperty("url"));
 		getDriver().manage().window().maximize();
@@ -73,7 +80,7 @@ public class DriverFactory {
 		try {
 			switch (browser) {
 			case "chrome":
-				tlDriver.set(new RemoteWebDriver(new URL(prop.getProperty("huburl")), optionManager.getChomeOptions()));
+				tlDriver.set(new RemoteWebDriver(new URL(prop.getProperty("huburl")), optionManager.getChromeOptions()));
 				break;
 			case "firefox":
 				tlDriver.set(new RemoteWebDriver(new URL(prop.getProperty("huburl")), optionManager.getFirefoxOptions()));

@@ -8,9 +8,11 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 
 import com.qa.opencart.factory.DriverFactory;
+import com.qa.opencart.pages.AccountsPage;
 import com.qa.opencart.pages.ForgottenYourPasswordPage;
 import com.qa.opencart.pages.HomePage;
 import com.qa.opencart.pages.LoginPage;
+import com.qa.opencart.pages.SearchResultPage;
 
 public class BaseTest {
 
@@ -19,6 +21,8 @@ public class BaseTest {
 	protected HomePage homePage;
 	protected LoginPage loginPage;
 	protected ForgottenYourPasswordPage forgotPasswordPage;
+	protected AccountsPage accountsPage;
+	protected SearchResultPage searchResPage;
 	
 	@Parameters({"browser"})
 	@BeforeTest
