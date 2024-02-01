@@ -17,6 +17,9 @@ public class FrameworkConstants {
 	//SuccessMsg:
 	public static final String ACCOUNT_CREATED_MSG = "Your Account Has Been Created!";
 	public static final String FORGOT_PASSWORD_RESET_EMAIL = " An email with a confirmation link has been sent your email address.";
+	public static final String PRODUCT_ADDED_TO_CART_First = "Success: You have added ";
+	public static final String PRODUCT_ADDED_TO_CART_Last = " to your shopping cart!";
+	public static final String SHOPPING_CART_REFRESH = "Success: You have modified your shopping cart!";
 	
 	//Titles
 	public static final String HOME_PAGE_TITLE = "Your Store";
@@ -25,6 +28,7 @@ public class FrameworkConstants {
 	public static final String FORGOTTEN_PASSWORD_PAGE_TITLE = "Forgot Your Password?";
 	public static final String ACCOUNT_PAGE_TITLE = "My Account";
 	public static final String PRODUCT_SEARCH_PAGE_TITLE = "Search";
+	public static final String SHOPPING_CART_PAGE_TITLE = "Shopping Cart";
 	
 	//URLs
 	public static final String HOME_PAGE_URL = "common/home";
@@ -36,6 +40,7 @@ public class FrameworkConstants {
 	public static final String ACCOUNT_LOGOUT_PAGE_URL = "account/logout";
 	public static final String PRODUCT_SEARCH_PAGE_URL = "product/search";
 	public static final String PRODUCT_INFO_PAGE_URL = "product/product";
+	public static final String SHOPPING_CART_PAGE_URL = "checkout/cart";
 	
 	
 	//Account page headers:
