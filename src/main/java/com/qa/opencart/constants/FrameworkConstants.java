@@ -46,4 +46,7 @@ public class FrameworkConstants {
 	//Account page headers:
 	public static final List<String> ACCOUNTS_PAGE_HEADER = new ArrayList<>(Arrays.asList("My Account","My Orders","My Affiliate Account","Newsletter"));
 	
+	//Empty acrt message:
+	public static final String SHOPPING_CART_EMPTY_MESSAGE = "Your shopping cart is empty!";
+	
 }

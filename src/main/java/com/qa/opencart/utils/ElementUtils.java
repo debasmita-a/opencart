@@ -109,4 +109,9 @@ public class ElementUtils {
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeout));
 		return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
 	}
+	
+	public void waitForTitleToBeAvailable(int timeout, String title) {
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeout));
+		wait.until(ExpectedConditions.titleContains(title));
+	}
 }

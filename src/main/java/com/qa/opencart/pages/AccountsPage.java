@@ -24,6 +24,9 @@ public class AccountsPage {
 	private By searchIcon = By.xpath("(//button[contains(@class,'btn-lg')])[1]");
 	private By logoutLink = By.linkText("Logout");
 	private By allHeaders = By.xpath("//h2");
+	private By shoppingCartLink = By.linkText("Shopping Cart");
+	private By cartTotal = By.id("cart");
+	private By cartEmptyText = By.xpath("//div[@id='cart']//li");
 	
 	//page actions
 	public String getAccountsPageURL() {
@@ -56,5 +59,15 @@ public class AccountsPage {
 		util.doSendKeys(searchBox, itemName);
 		util.doClick(searchIcon);
 		return new SearchResultPage(driver);
+	}
+	
+	public ShoppingCartPage navigateToShoppingCartPage() {
+		util.doClick(shoppingCartLink);
+		return new ShoppingCartPage(driver);
+	}
+	
+	public String getEmptyCartText() {
+		util.doClick(cartTotal);
+		return util.doGetText(cartEmptyText);
 	}
 }

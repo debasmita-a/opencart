@@ -56,4 +56,9 @@ public class AccountsPageTest extends BaseTest{
 		Assert.assertEquals(searchResPage.getSearchResultCount(), productCount);
 	}
 	
+	@Test
+	public void getEmptyCartTextTest() {
+		Assert.assertEquals(accountsPage.getEmptyCartText(), FrameworkConstants.SHOPPING_CART_EMPTY_MESSAGE);
+	}
+	
 }

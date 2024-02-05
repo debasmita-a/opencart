@@ -33,7 +33,6 @@ public class ProductInfoPage {
 	
 	private By cartTotalBtn = By.id("cart-total");
 	private By viewCartBtn = By.xpath("//a//strong[contains(text(),'View Cart')]");
-	private By checkoutBtn = By.xpath("//a//strong[contains(text(),'Checkout')]");
 	//page actions :
 	
 	public String getProductInfoPageURL() {
@@ -67,11 +66,6 @@ public class ProductInfoPage {
 		productMap.put(taxKey, taxValue);
 	}
 	
-	public String addProductToCart() {
-		util.doClick(addToCartBtn);
-		return util.waitForElementToBeVisible(successMsg, 5).getAttribute("textContent");
-	}
-	
 	public String getProductHeaderValue() {
 		return util.doGetText(productHeader);
 	}
@@ -88,10 +82,9 @@ public class ProductInfoPage {
 		return productMap;
 	}
 	
-	public ShoppingCartPage navigateToShoppingCartPage() {
-		addProductToCart();
-		util.doClick(cartTotalBtn);
-		util.doClick(viewCartBtn);
-		return new ShoppingCartPage(driver);
+	public String addProductToCart() {
+		util.doClick(addToCartBtn);
+		return util.waitForElementToBeVisible(successMsg, 5).getAttribute("textContent");
 	}
+	
 }
