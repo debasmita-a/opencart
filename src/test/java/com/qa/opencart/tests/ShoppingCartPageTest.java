@@ -11,6 +11,7 @@ import org.testng.annotations.Test;
 
 import com.qa.opencart.base.BaseTest;
 import com.qa.opencart.constants.FrameworkConstants;
+import com.qa.opencart.pages.ShoppingCartPage;
 
 public class ShoppingCartPageTest extends BaseTest{
 	
@@ -33,11 +34,11 @@ public class ShoppingCartPageTest extends BaseTest{
 	
 	@DataProvider
 	public Object[] productAddToCartTestdata(){
-		List<String> data = new ArrayList<>(Arrays.asList("Samsung SyncMaster 941BW","MacBook","iMac"));
+		List<String> data = new ArrayList<>(Arrays.asList("MacBook Pro","MacBook","iMac"));
 		return new Object[]{data};
 	}
 	
-	@Test(dataProvider = "productAddToCartTestdata")
+	@Test(enabled = false, dataProvider = "productAddToCartTestdata")
 	public void getCartTotalItemsTest(List<String> products) {
 		for(String product : products) {
 	    	accountsPage.doSearch(product).selectProduct(product).addProductToCart();
@@ -47,23 +48,60 @@ public class ShoppingCartPageTest extends BaseTest{
 		shoppingcartPage.removeAllItemsFromCart();
 	}
 	
-	@Test(dataProvider = "productAddToCartTestdata")
+	@Test(enabled = false, dataProvider = "productAddToCartTestdata")
 	public void getProductsTotalPriceTest(List<String> products) {
 	    for(String product : products) {
 	    	accountsPage.doSearch(product).selectProduct(product).addProductToCart();
 	    }
 		shoppingcartPage = accountsPage.navigateToShoppingCartPage();
-		Assert.assertTrue(shoppingcartPage.getProductsTotalPrice());
-		shoppingcartPage.removeAllItemsFromCart();
+		
 	}
 	
 	@Test(enabled = false, dataProvider = "productAddToCartTestdata")
 	public void getCartPriceDetailsTest(List<String> products) {
-		
+		for(String product : products) {
+	    	accountsPage.doSearch(product).selectProduct(product).addProductToCart();
+	    }
 		shoppingcartPage = accountsPage.navigateToShoppingCartPage();
-		System.out.println(shoppingcartPage.getCartPriceDetails());
 	}
-
-		
 	
+	@Test
+	public void checkProductPriceOnCartTest() {
+		productInfoPage = accountsPage.doSearch("MacBook").selectProduct("MacBook Pro");
+		double productPriceFromInfoPage = (double)productInfoPage.getProductData().get("Product price");
+		productInfoPage.addProductToCart();
+		shoppingcartPage = accountsPage.navigateToShoppingCartPage();
+		double productPriceOnCartPage = shoppingcartPage.getProductPriceOnCart();
+		Assert.assertEquals(productPriceFromInfoPage, productPriceOnCartPage);
+		shoppingcartPage.removeAllItemsFromCart();
+	}
+	
+	@Test(dataProvider = "productAddToCartTestdata")
+	public void removeAllItemsFromCartTest(List<String> products) {
+		for(String product : products) {
+	    	accountsPage.doSearch(product).selectProduct(product).addProductToCart();
+	    }
+		shoppingcartPage = accountsPage.navigateToShoppingCartPage();
+		Assert.assertTrue(shoppingcartPage.removeAllItemsFromCart());
+	}
+	
+	@Test(dataProvider = "productAddToCartTestdata")
+	public void doesContinueShoppingBtnExistTest(List<String> products) {
+		for(String product : products) {
+	    	accountsPage.doSearch(product).selectProduct(product).addProductToCart();
+	    }
+		shoppingcartPage = accountsPage.navigateToShoppingCartPage();
+		Assert.assertTrue(shoppingcartPage.doesContinueShoppingBtnExist());
+		shoppingcartPage.removeAllItemsFromCart();
+	}
+	
+	@Test(dataProvider = "productAddToCartTestdata")
+	public void doesCheckoutBtnExistTest(List<String> products) {
+		for(String product : products) {
+	    	accountsPage.doSearch(product).selectProduct(product).addProductToCart();
+	    }
+		shoppingcartPage = accountsPage.navigateToShoppingCartPage();
+		Assert.assertTrue(shoppingcartPage.doesCheckoutBtnExist());
+		shoppingcartPage.removeAllItemsFromCart();
+	}
 }

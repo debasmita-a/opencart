@@ -25,6 +25,7 @@ public class SearchResultPage {
 	
 	public ProductInfoPage selectProduct(String productName) {
 		util.doClick(By.linkText(productName));
+		//util.waitForElementToBePresent(By.linkText(productName), 5).click();
 		return new ProductInfoPage(driver);
 	}
 }

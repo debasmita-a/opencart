@@ -114,4 +114,19 @@ public class ElementUtils {
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeout));
 		wait.until(ExpectedConditions.titleContains(title));
 	}
+	
+	public WebElement waitForElementToBePresent(By locator, int timeout) {
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeout));
+		return wait.until(ExpectedConditions.presenceOfElementLocated(locator));
+	}
+	
+	public WebElement waitForElementToBeClickable(By locator, int timeout) {
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeout));
+		return wait.until(ExpectedConditions.elementToBeClickable(locator));
+	}
+	
+	public boolean waitForTextToBePresent(By locator, int timeout, String text) {
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeout));
+		return wait.until(ExpectedConditions.textToBePresentInElementLocated(locator, text));
+	}
 }

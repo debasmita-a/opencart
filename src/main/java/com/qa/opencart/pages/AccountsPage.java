@@ -57,7 +57,9 @@ public class AccountsPage {
 
 	public SearchResultPage doSearch(String itemName) {
 		util.doSendKeys(searchBox, itemName);
+		//util.waitForElementToBePresent(searchBox, 5).sendKeys(itemName);
 		util.doClick(searchIcon);
+		//util.waitForElementToBeClickable(searchIcon, 5).click();
 		return new SearchResultPage(driver);
 	}
 	

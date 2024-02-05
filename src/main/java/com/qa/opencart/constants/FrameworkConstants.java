@@ -29,6 +29,7 @@ public class FrameworkConstants {
 	public static final String ACCOUNT_PAGE_TITLE = "My Account";
 	public static final String PRODUCT_SEARCH_PAGE_TITLE = "Search";
 	public static final String SHOPPING_CART_PAGE_TITLE = "Shopping Cart";
+	public static final String CHECKOUT_PAGE_TITLE = "Checkout";
 	
 	//URLs
 	public static final String HOME_PAGE_URL = "common/home";
@@ -41,6 +42,7 @@ public class FrameworkConstants {
 	public static final String PRODUCT_SEARCH_PAGE_URL = "product/search";
 	public static final String PRODUCT_INFO_PAGE_URL = "product/product";
 	public static final String SHOPPING_CART_PAGE_URL = "checkout/cart";
+	public static final String CHECKOUT_PAGE_URL = "checkout/checkout";
 	
 	
 	//Account page headers:

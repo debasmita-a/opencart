@@ -33,6 +33,7 @@ public class ProductInfoPage {
 	
 	private By cartTotalBtn = By.id("cart-total");
 	private By viewCartBtn = By.xpath("//a//strong[contains(text(),'View Cart')]");
+	
 	//page actions :
 	
 	public String getProductInfoPageURL() {
@@ -59,10 +60,10 @@ public class ProductInfoPage {
 	
 	public void getPriceMetadataMap() {
 		List<WebElement> eleList = util.getElements(priceMetadata);
-		double actualPrice = Double.parseDouble(eleList.get(0).getText().replace("$", "").trim());
+		double actualPrice = Double.parseDouble(eleList.get(0).getText().replace("$", "").replace(",", "").trim());
 		productMap.put("Product price", actualPrice);
 		String taxKey = eleList.get(1).getText().split(":")[0].trim();
-		double taxValue = Double.parseDouble((eleList.get(1).getText().split(":")[1].replace("$", "").trim()));
+		double taxValue = Double.parseDouble((eleList.get(1).getText().split(":")[1].replace("$", "").replace(",", "").trim()));
 		productMap.put(taxKey, taxValue);
 	}
 	
