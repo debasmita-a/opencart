@@ -8,21 +8,24 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.qa.opencart.utils.ElementUtils;
+import com.qa.opencart.utils.JavascriptUtil;
 
 public class ShoppingCartPage {
 
 	private WebDriver driver;
 	private ElementUtils util;
+	private JavascriptUtil jsUtil;
 
 	public ShoppingCartPage(WebDriver driver) {
 		this.driver = driver;
 		util = new ElementUtils(driver);
+		jsUtil = new JavascriptUtil(driver);
 	}
 
 	// private By locators
 	private By shoppingCartHeader = By.xpath("//h1[contains(text(),'Shopping Cart')] ");
 	private By continueShoppingBtn = By.linkText("Continue Shopping");
-	private By checkoutBtn = By.linkText("Checkout");
+	private By checkoutBtn = By.xpath("//a[text()='Checkout']");
 	private By continueBtn = By.linkText("Continue");
 
 	private By cartItems = By.xpath("(//table)[3]//tbody//tr");
@@ -118,7 +121,8 @@ public class ShoppingCartPage {
 	}
 
 	public CheckoutPage doCheckout() {
-		util.doClick(checkoutBtn);
+		jsUtil.scrollPageDown();
+		util.actionClick(checkoutBtn);		
 		return new CheckoutPage(driver);
 	}
 

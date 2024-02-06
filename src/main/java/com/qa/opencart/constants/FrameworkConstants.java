@@ -20,6 +20,7 @@ public class FrameworkConstants {
 	public static final String PRODUCT_ADDED_TO_CART_First = "Success: You have added ";
 	public static final String PRODUCT_ADDED_TO_CART_Last = " to your shopping cart!";
 	public static final String SHOPPING_CART_REFRESH = "Success: You have modified your shopping cart!";
+	public static final String ORDER_CONFIRMATION = "Your order has been placed!";
 	
 	//Titles
 	public static final String HOME_PAGE_TITLE = "Your Store";
@@ -30,6 +31,7 @@ public class FrameworkConstants {
 	public static final String PRODUCT_SEARCH_PAGE_TITLE = "Search";
 	public static final String SHOPPING_CART_PAGE_TITLE = "Shopping Cart";
 	public static final String CHECKOUT_PAGE_TITLE = "Checkout";
+	public static final String ORDER_PLACED_PAGE_TITLE = "Your order has been placed!";
 	
 	//URLs
 	public static final String HOME_PAGE_URL = "common/home";
@@ -43,6 +45,7 @@ public class FrameworkConstants {
 	public static final String PRODUCT_INFO_PAGE_URL = "product/product";
 	public static final String SHOPPING_CART_PAGE_URL = "checkout/cart";
 	public static final String CHECKOUT_PAGE_URL = "checkout/checkout";
+	public static final String ORDER_PLACED_PAGE_URL = "checkout/success";
 	
 	
 	//Account page headers:
@@ -50,5 +53,15 @@ public class FrameworkConstants {
 	
 	//Empty acrt message:
 	public static final String SHOPPING_CART_EMPTY_MESSAGE = "Your shopping cart is empty!";
+	
+	//Checkout page form mandatory fields error mesg:
+	public static final List<String> BILLING_DETAILS_ERROR_MESSAGE = new ArrayList<>(Arrays.asList("First Name must be between 1 and 32 characters!",
+			"Last Name must be between 1 and 32 characters!",
+			"Address 1 must be between 3 and 128 characters!",
+			"City must be between 2 and 128 characters!",
+			"Postcode must be between 2 and 10 characters!",
+			"Please select a region / state!"));
+	
+	public static final String SHIPPING_FLAT_RATE = "Flat Shipping Rate - $5.00";
 	
 }

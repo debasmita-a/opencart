@@ -8,6 +8,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class ElementUtils {
@@ -101,7 +102,20 @@ public class ElementUtils {
 	}
 	
 	//**************************Select class utilities****************//
+	public void selectDropdownByValue(By locator, String value) {
+		Select select = new Select(getElement(locator));
+		select.selectByValue(value);
+	}
 	
+	public void selectDropdownByVisibleText(By locator, String text) {
+		Select select = new Select(getElement(locator));
+		select.selectByVisibleText(text);
+	}
+	
+	public void selectDropdownByIndex(By locator, int index) {
+		Select select = new Select(getElement(locator));
+		select.selectByIndex(index);
+	}
 	
 	//**************** wait utilities *********************************//
 	

@@ -13,6 +13,7 @@ import com.qa.opencart.pages.CheckoutPage;
 import com.qa.opencart.pages.ForgottenYourPasswordPage;
 import com.qa.opencart.pages.HomePage;
 import com.qa.opencart.pages.LoginPage;
+import com.qa.opencart.pages.OrderConfirmationPage;
 import com.qa.opencart.pages.ProductInfoPage;
 import com.qa.opencart.pages.SearchResultPage;
 import com.qa.opencart.pages.ShoppingCartPage;
@@ -29,6 +30,7 @@ public class BaseTest {
 	protected ProductInfoPage productInfoPage;
 	protected ShoppingCartPage shoppingcartPage;
 	protected CheckoutPage checkoutPage;
+	protected OrderConfirmationPage orderConfirmPage;
 	
 	@Parameters({"browser"})
 	@BeforeTest
