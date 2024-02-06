@@ -16,21 +16,22 @@ public class OrderConfirmationPage {
 	}
 	
 	//private By locators
-	private By orderConfirmationHeader = By.xpath("//h2");
+	private By orderConfirmationHeader = By.xpath("//h1");
 	private By continueBtn = By.linkText("Continue");
 	
 	//page actions
 	
-	public String getOrderConfirmPageTitle() {
-		return util.getPageTitle();
+	public boolean getOrderConfirmPageTitle() {
+		return util.waitForTitleToBePresent(5, "Your order has been placed!");
 	}
 	
 	public String getOrderConfirmPageURL() {
 		return util.getPageUrl();
 	}
 	
-	public String getOrderConfirmationHeader() {
-		return util.doGetText(orderConfirmationHeader);
+	public boolean getOrderConfirmationHeader() {
+		return util.waitForTextToBePresent(orderConfirmationHeader, 5, "Your order has been placed!");
+		//return util.waitForElementToBePresent(orderConfirmationHeader, 5).getText();
 	}
 	
 	public HomePage clickContinueBtn() {

@@ -25,7 +25,7 @@ public class CheckoutPageTest extends BaseTest{
 		return new Object[]{data};
 	}
 		
-	@Test(dataProvider = "productAddToCartTestdata")
+	@Test(enabled = true, dataProvider = "productAddToCartTestdata")
 	public void getCheckoutPageURL(List<String> products) {
 		for(String product : products) {
 	    	accountsPage.doSearch(product).selectProduct(product).addProductToCart();
@@ -37,7 +37,7 @@ public class CheckoutPageTest extends BaseTest{
 		shoppingcartPage.removeAllItemsFromCart();
 	}
 	
-	@Test(dataProvider = "productAddToCartTestdata")
+	@Test(enabled = true, dataProvider = "productAddToCartTestdata")
 	public void getCheckoutPageTitleTest(List<String> products) {
 		for(String product : products) {
 	    	accountsPage.doSearch(product).selectProduct(product).addProductToCart();
@@ -56,7 +56,8 @@ public class CheckoutPageTest extends BaseTest{
 	    }
 		shoppingcartPage = accountsPage.navigateToShoppingCartPage();
 		checkoutPage = shoppingcartPage.doCheckout();
-		orderConfirmPage = checkoutPage.confirmCheckoutDetails();
-		Assert.assertEquals(orderConfirmPage.getOrderConfirmationHeader(), FrameworkConstants.ORDER_CONFIRMATION);
+		checkoutPage.confirmCheckoutDetails();
+		orderConfirmPage = checkoutPage.confirmOrder();
+		Assert.assertTrue(orderConfirmPage.getOrderConfirmationHeader());
 	}
 }

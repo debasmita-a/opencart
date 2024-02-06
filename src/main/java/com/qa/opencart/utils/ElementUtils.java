@@ -124,11 +124,6 @@ public class ElementUtils {
 		return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
 	}
 	
-	public void waitForTitleToBeAvailable(int timeout, String title) {
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeout));
-		wait.until(ExpectedConditions.titleContains(title));
-	}
-	
 	public WebElement waitForElementToBePresent(By locator, int timeout) {
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeout));
 		return wait.until(ExpectedConditions.presenceOfElementLocated(locator));
@@ -142,5 +137,10 @@ public class ElementUtils {
 	public boolean waitForTextToBePresent(By locator, int timeout, String text) {
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeout));
 		return wait.until(ExpectedConditions.textToBePresentInElementLocated(locator, text));
+	}
+	
+	public boolean waitForTitleToBePresent(int timeout, String title) {
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeout));
+		return wait.until(ExpectedConditions.titleContains(title));
 	}
 }

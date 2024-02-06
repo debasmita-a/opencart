@@ -31,7 +31,7 @@ public class CheckoutPage {
 	private By postalCode = By.id("input-payment-postcode");
 	private By country = By.id("input-payment-country");
 	private By region = By.id("input-payment-zone");
-	private By continueBtnBillingDetails = By.id("button-payment-address");
+	private By continueBtnBillingDetails = By.xpath("//div[contains(@class,'clearfix')]//input[@id='button-payment-address']");
 	private By existingPaymentAddress = By.id("payment-existing");
 	
 	private By mandatoryFieldsErrorMessages = By.xpath("//div[@class='text-danger']");
@@ -48,6 +48,7 @@ public class CheckoutPage {
 	private By termsAndConditions = By.xpath("//input[@type='checkbox']");
 	//confirm order:
 	private By continueBtnConfirmOrder = By.id("button-confirm");
+	private By orderConfirmationHeader = By.xpath("//h1");
 	
 	//page actions
 	public String getCheckoutPageURL() {
@@ -133,13 +134,16 @@ public class CheckoutPage {
 	}
 	
 	//for regular user :
-	public OrderConfirmationPage confirmCheckoutDetails() {
-		util.doClick(continueBtnBillingDetails);
-		util.doClick(continueBtnDeliveryDetails);	
-		util.doClick(continueBtnDeliveryMethod);
-		util.actionClick(termsAndConditions);
-		util.doClick(continueBtnPaymentMethod);
-		util.doClick(continueBtnConfirmOrder);
+	public void confirmCheckoutDetails() {
+		util.waitForElementToBeClickable(continueBtnBillingDetails, 5).click();
+		util.waitForElementToBeClickable(continueBtnDeliveryDetails, 5).click();
+		util.waitForElementToBeClickable(continueBtnDeliveryMethod, 5).click();
+		util.waitForElementToBeClickable(termsAndConditions, 5).click();
+		util.waitForElementToBeClickable(continueBtnPaymentMethod, 5).click();
+	}
+	
+	public OrderConfirmationPage confirmOrder() {
+		util.waitForElementToBeClickable(continueBtnConfirmOrder, 5).click();
 		return new OrderConfirmationPage(driver);
 	}
 	
