@@ -32,14 +32,16 @@ public class BaseTest {
 	protected CheckoutPage checkoutPage;
 	protected OrderConfirmationPage orderConfirmPage;
 	
-	@Parameters({"browser"})
+	@Parameters({"browser", "browserversion", "testcasename"})
 	@BeforeTest
-	public void setup(String browserName) {
+	public void setup(String browserName, String browserVersion, String testcaseName) {
 		DriverFactory df = new DriverFactory();
 		prop = df.initProp();
 		
 		if(browserName!=null) {
 			prop.setProperty("browser", browserName);
+			prop.setProperty("browserversion", browserVersion);
+			prop.setProperty("testcasename", testcaseName);
 		}
 		
 		driver = df.initDriver(prop);
