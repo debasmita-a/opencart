@@ -10,10 +10,13 @@
 		<listener
 			class-name="com.qa.opencart.listeners.AllureReportListener" />
 	</listeners>
+
 	<test name="Home Page Test">
+
 		<parameter name="browser" value="chrome" />
 		<parameter name="browserversion" value="109.0" />
 		<parameter name="testcasename" value="Home Page Test" />
+
 		<classes>
 			<class name="com.qa.opencart.tests.HomePageTest" />
 		</classes>
@@ -35,9 +38,11 @@
 		</classes>
 	</test>
 	<test name="Login Page Test">
+
 		<parameter name="browser" value="chrome" />
 		<parameter name="browserversion" value="100.0" />
 		<parameter name="testcasename" value="Login Page Test" />
+
 		<classes>
 			<class name="com.qa.opencart.tests.LoginPageTest" />
 		</classes>

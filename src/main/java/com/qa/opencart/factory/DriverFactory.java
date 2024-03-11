@@ -21,9 +21,9 @@ import com.qa.opencart.exceptions.FrameworkExceptions;
 
 public class DriverFactory {
 
-	private WebDriver driver;
-	private Properties prop;
-	private OptionsManager optionManager;
+	WebDriver driver;
+	Properties prop;
+	OptionsManager optionManager;
 
 	public static ThreadLocal<WebDriver> tlDriver = new ThreadLocal<WebDriver>();
 
