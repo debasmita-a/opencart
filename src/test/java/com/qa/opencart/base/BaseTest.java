@@ -33,16 +33,15 @@ public class BaseTest {
 	protected CheckoutPage checkoutPage;
 	protected OrderConfirmationPage orderConfirmPage;
 	
-	@Parameters({"browser", "browserversion", "testcasename"})
+	@Parameters({"browser"})
 	@BeforeTest
-	public void setup(String browserName, String browserVersion, String testcaseName) {
+	public void setup(String browserName) {
 		DriverFactory df = new DriverFactory();
 		prop = df.initProp();
 		
 		if(browserName!=null) {
 			prop.setProperty("browser", browserName);
-			prop.setProperty("browserversion", browserVersion);
-			prop.setProperty("testcasename", testcaseName);
+			
 		}
 		
 		driver = df.initDriver(prop);
@@ -51,7 +50,7 @@ public class BaseTest {
 	
 	@AfterTest
 	public void teardown() {
-		//driver.quit();
+		driver.quit();
 	}
 	
 	

@@ -19,15 +19,16 @@ public class OptionsManager {
 	
 	public ChromeOptions getChromeOptions() {
 		co = new ChromeOptions();
+		co.addArguments("--remote-allow-origins=*");
 		if(Boolean.parseBoolean(prop.getProperty("headless").trim())) co.addArguments("--headless");
 		if(Boolean.parseBoolean(prop.getProperty("incognito").trim())) co.addArguments("--incognito");
 		
 		if(Boolean.parseBoolean(prop.getProperty("remote").trim())) {
 
-			co.setCapability("browsername", "chrome");
-			co.setBrowserVersion(prop.getProperty("browserversion").trim());
-			co.setCapability("enableVNC", true);
-			co.setCapability("name", prop.getProperty("testcasename"));
+			co.setCapability("browserName", "chrome");
+			//co.setBrowserVersion(prop.getProperty("browserversion").trim());
+			//co.setCapability("enableVNC", true);
+			//co.setCapability("name", prop.getProperty("testcasename"));
 
 		}		
 		return co;
@@ -39,9 +40,9 @@ public class OptionsManager {
 		if(Boolean.parseBoolean(prop.getProperty("incognito").trim())) fo.addArguments("--incognito");
 		
 		if(Boolean.parseBoolean(prop.getProperty("remote").trim())) {
-			fo.setCapability("browsername", "firefox");
+			fo.setCapability("browserName", "firefox");
 
-			fo.setBrowserVersion(prop.getProperty("browserversion").trim());
+			//fo.setBrowserVersion(prop.getProperty("browserversion").trim());
 
 		}		
 		return fo;
@@ -49,13 +50,14 @@ public class OptionsManager {
 	
 	public EdgeOptions getEdgeOptions() {
 		eo = new EdgeOptions();
+		//eo.addArguments("--remote-allow-origins=*");
 		if(Boolean.parseBoolean(prop.getProperty("headless").trim())) eo.addArguments("--headless");
 		if(Boolean.parseBoolean(prop.getProperty("incognito").trim())) eo.addArguments("--incognito");
 		
 		if(Boolean.parseBoolean(prop.getProperty("remote").trim())) {
-			eo.setCapability("browsername", "edge");
+			eo.setCapability("browserName", "edge");
 
-			eo.setBrowserVersion(prop.getProperty("browserversion").trim());
+			//eo.setBrowserVersion(prop.getProperty("browserversion").trim());
 
 		}		
 		return eo;
