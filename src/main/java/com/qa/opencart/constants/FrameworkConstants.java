@@ -8,6 +8,7 @@ public class FrameworkConstants {
 
 	//Error msg:
 	public static final String INCORRECT_LOGIN_WARNING_MSG = " Warning: No match for E-Mail Address and/or Password.";
+	public static final String INCORRECT_LOGIN_WARNING_MSG_MULTIPLE_TRY =" Warning: Your account has exceeded allowed number of login attempts. Please try again in 1 hour.";
 	public static final String POLICY_CHECK_WARNING = "Warning: You must agree to the Privacy Policy!";
 	public static final String PASSWORD_CHAR_ERROR = "Password must be between 4 and 20 characters!";
 	public static final String PASSWORD_MISMATCH_ERROR = "Password confirmation does not match password!";

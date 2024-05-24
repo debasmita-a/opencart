@@ -40,7 +40,7 @@ public class LoginPageTest extends BaseTest{
 	
 	@Test(dataProvider = "negativeLoginTestdata")
 	public void negativeLoginTest(String username, String password) {
-		Assert.assertTrue(loginPage.negativeLogin(username, password).contains(FrameworkConstants.INCORRECT_LOGIN_WARNING_MSG));
+		Assert.assertTrue(loginPage.negativeLogin(username, password).contains(FrameworkConstants.INCORRECT_LOGIN_WARNING_MSG_MULTIPLE_TRY));
 	}
 	
 	@Test
